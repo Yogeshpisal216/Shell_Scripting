@@ -1,0 +1,19 @@
+Wed Jun 11 05:35:46 PM IST 2025
+
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           6.3G  3.7M  6.3G   1% /run
+/dev/sda2       916G   26G  843G   3% /
+tmpfs            32G   26M   32G   1% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+/dev/sda1       511M  5.3M  506M   2% /boot/efi
+tmpfs           6.3G  140K  6.3G   1% /run/user/1000
+
+               total        used        free      shared  buff/cache   available
+Mem:        65529600     3663424    51063060      120976    10803116    61042672
+Swap:        2097148           0     2097148
+
+ 17:35:46 up 1 day,  1:27,  1 user,  load average: 1.29, 0.71, 0.58
+
+10.10.10.197 
+
+***************END***************

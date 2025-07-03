@@ -1,0 +1,384 @@
+#All about shell scripting.
+*************************************
+1. Introduction to Shell Scripting
+What is a shell?
+
+Types of shells (bash, sh, zsh, etc.)
+
+Why use shell scripting?
+
+Writing and executing your first shell script
+
+#!/bin/bash   Shebang line
+
+2. Basic Shell Commands
+File and directory commands: ls, cd, pwd, mkdir, rm, cp, mv
+
+Viewing content: cat, less, more, head, tail
+
+Permissions: chmod, chown, umask
+
+System status: top, ps, df, du, free, uptime
+
+3. Variables and User Input
+Defining and accessing variables
+
+Environment vs local variables
+
+read for user input
+
+Command substitution: $(...), backticks `...`
+
+4. Operators
+Arithmetic operators (+, -, *, /, %)
+
+Comparison operators (-eq, -ne, -lt, -le, -gt, -ge)
+
+Logical operators (&&, ||, !)
+
+File test operators (-e, -f, -d, -r, -w, -x)
+
+5. Control Flow
+if, else, elif
+
+case statement
+
+Loops:
+
+for
+
+while
+
+until
+
+Loop control: break, continue, exit
+
+6. Functions
+Defining and calling functions
+
+Function parameters and return values
+
+Variable scope in functions
+
+7. Command Line Arguments
+$0, $1, $2, ..., $#, $*, $@
+
+Shifting arguments with shift
+
+8. Input/Output and Redirection
+Standard input, output, error: stdin, stdout, stderr
+
+Redirection: >, >>, <, 2>, &>
+
+Piping: |
+
+tee command
+
+9. String and Text Processing
+String manipulation: ${#var}, ${var:pos}, ${var/pattern/replacement}
+
+Commands: cut, awk, sed, grep, tr, sort, uniq
+
+10. File Handling
+Reading and writing to files
+
+while read loops
+
+File descriptors
+
+11. Debugging and Error Handling
+set -x, set -e
+
+Exit codes: $?
+
+Trap signals with trap
+
+12. Practical Scripting Projects
+Backup automation
+
+Log monitoring
+
+Batch file renaming
+
+System health check script
+
+User management automation
+
+13. Advanced Topics
+Scheduling with cron
+
+POSIX compliance
+
+Interactive scripts (e.g., menus using select)
+
+Using getopts for parsing options
+
+Using xargs, find, and exec
+
+
+*************************************
+
+Writing Script.
+-----------------------------------------------------
+*Create file of shell script using .sh extension.
+--> myscript.sh
+
+*Add shebang line on top of file.
+--> #!/bin/bash
+
+*Make it executable.
+--> chmod -x myscript.sh
+
+*Run the script.
+.myscript.sh
+sh myscript.sh
+
+------------------------------------------------------
+
+Common Commands.
+------------------------------------------------------
+
+ls
+cd
+pwd
+echo
+cat
+cp
+mv
+rm
+touch
+mkdir
+
+------------------------------------------------------
+
+Scrpting.
+------------------------------------------------------
+
+1)Creating a bash script.
+
+*Variables
+
+#!/bin/bash
+
+name = "Yogesh"
+echo "Hello, $name!"
+number = 22
+echo "The number is $number"
+
+*Local Variable.
+
+car() {
+  local Tata="Range Rover"
+  echo "$Tata"
+}
+car
+
+*Global Variable.
+
+*Arithmetic operator.
+
+num1 = 5
+num2 = 10
+
+sum = $((num1 + num2))
+echo "The sum is $sum"
+
+let --> is command. It perform as a integer values.
+
+*******************
+x=10
+y=20
+
+let mul=$x*$y
+echo "$mul"
+******************
+
+--------------------------------------------------
+
+#Array.
+-----------------------------------------
+myArray=(1 20 30.6 Hello "Hey Buddy!")
+
+#Find all values.
+echo "All the values in array are ${myArray[*]}"
+
+#Find multiple values.
+echo "No. of values ${myArray[*]:2:2}""
+
+#Find only perticular index.
+echo "Value of 3rd index ${myArray[3]}""
+-----------------------------------------------------
+
+#Comparison operator.
+
+Equal                 =  -eq/==
+Greaterthanorequalto  =  -ge
+Lessthanorequalto     =  -le
+NotEqual              =  -ne/!=
+GreaterThan           =  -gt
+LessThan              =  -lt
+
+#Conditional statement.
+
+*IF-ELSE
+---------------------------------------------------------
+
+#!/bin/bash
+
+read -p "Enter your marks : "  marks
+
+if [ $marks -gt 40 ]
+then
+	echo "you are pass!"
+else
+	echo "you are fail!"
+fi
+
+-------------------------------------------
+
+*IF-ELIF-ELSE
+-------------------------------------------
+
+#!/bin/bash
+
+read -p "Enter your marks : "  marks
+
+if [ $marks -ge 75 ]
+then
+	echo "First Division!"
+	
+elif [ $marks -ge 60 ]
+then
+	echo "Second Division!"
+
+elif [ $marks -ge 35 ]
+then
+	echo "Third Division!"
+
+else
+	echo "you are fail!"
+fi
+
+--------------------------------------------
+
+*CASE
+--------------------------------------------
+
+#!/bin/bash
+
+echo "Provide an option"
+echo "a for print date"
+echo "b for list of scripts"
+echo "c to check the current location"
+
+read choice
+
+case $choice in
+	a)	
+		echo "Today's date is:"
+		date
+		echo "Ending.."
+		;;
+	b)ls;;
+	c)pwd;;
+	*)echo "Please provide a valid value.."
+esac
+-------------------------------------------------
+
+#Logical Operators
+-------------------------------------------------
+
+#!/bin/bash
+
+#AND operator. (&&)
+
+read -p "Enter your age : " age
+read -p "Enter to your country : " country
+
+if [ $age -ge 18 ] && [ $country == "one" ]
+then
+	echo "You are eligible to vote...."
+else
+	echo "You are not eligible to vote..."
+fi
+
+
+#(||)
+
+read -p "Enter your age : " age
+
+[ $age -ge 18 ] && echo "Adult" || echo "Minor"
+---------------------------------------------------
+
+#Looping
+
+---------------------------------------------------
+*For loop.
+*****************************
+#!/bin/bash
+
+#Numbers.
+
+for i in 1 2 3 4 5
+do 	
+	echo "Number are $i"
+done
+******************************
+******************************
+#!/bin/bash
+
+#String.
+
+for r in yogesh omkar nilesh
+do 
+	echo "User are $r"
+done
+
+******************************
+******************************
+script.txt
+-------------
+Yogesh 
+Omkar
+1
+2
+-------------
+*******************************
+*******************************
+#!/bin/bash
+
+#Getting values from another file.
+
+FILE="/home/itadmin/YOGI/RND/Shell_Scripting/script.txt"
+
+for name in $(cat $FILE)
+do 
+	echo "Value are $name"
+done
+********************************
+********************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
